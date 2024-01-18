@@ -6,6 +6,11 @@ import { useState } from 'react';
 function Navbar() {
     const [navOpen, setNavOpen] = useState(false);
 
+
+    //implmenet sub
+    const isLogged = true;
+
+
     function toggleNav() {
         setNavOpen(!navOpen);
     }
@@ -20,21 +25,30 @@ function Navbar() {
             </button>
             <div className={`flex-grow ${navOpen ? '' : 'hidden'} lg:flex lg:items-center lg:w-auto`} id="nav">
                 <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
-                    <li>
-                        <Link className="text-white hover:text-gray-400 px-4 py-2 block" href="/">Home</Link>
-                    </li>
-                    <li>
-                        <Link className="text-white hover:text-gray-400 px-4 py-2 block" href="/profile">Profile</Link>
-                    </li>
-                    <li>
-                        <Link className="text-white hover:text-gray-400 px-4 py-2 block" href="/edit">Edit Tasks</Link>
-                    </li>
-                    <li>
-                        <Link className="text-white hover:text-gray-400 px-4 py-2 block" href="/tasks/new">Create</Link>
-                    </li>
-                    <li>
-                        <Link className="text-white hover:text-gray-400 px-4 py-2 block" href="/tasks/completed">Completed</Link>
-                    </li>
+                    {!isLogged ? (<>
+                        <li>
+                            <Link className="text-white hover:text-gray-400 px-4 py-2 block" href="/">Home</Link>
+                        </li> <li>
+                            <Link className="text-white hover:text-gray-400 px-4 py-2 block" href="/login">Log in</Link>
+                        </li>
+
+                    </>) : (<>
+                        <li>
+                            <Link className="text-white hover:text-gray-400 px-4 py-2 block" href="/">Home</Link>
+                        </li>
+                        <li>
+                            <Link className="text-white hover:text-gray-400 px-4 py-2 block" href="/profile">Profile</Link>
+                        </li>
+                        <li>
+                            <Link className="text-white hover:text-gray-400 px-4 py-2 block" href="/edit">Edit Tasks</Link>
+                        </li>
+                        <li>
+                            <Link className="text-white hover:text-gray-400 px-4 py-2 block" href="/tasks/new">Create</Link>
+                        </li>
+                        <li>
+                            <Link className="text-white hover:text-gray-400 px-4 py-2 block" href="/tasks/completed">Completed</Link>
+                        </li>
+                    </>)}
                 </ul>
             </div>
         </nav>
