@@ -1,8 +1,7 @@
-
 export default function Edit() {
-    return (
-        <>
-            Edit
-        </>
-    );
+  return (
+    <>
+      Edit
+    </>
+  );
 }

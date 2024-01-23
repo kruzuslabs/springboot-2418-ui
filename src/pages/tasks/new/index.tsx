@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 // import * as React from "react";
 // import { CalendarIcon } from "@radix-ui/react-icons";
 // import { format } from "date-fns";
@@ -23,10 +23,6 @@ import { Button } from '@/components/ui/button';
 //         <>
 
 //             <div className={`flex min-h-screen flex-col items-center justify-between`}>
-
-
-
-
 
 //                 <Popover>
 //                     <PopoverTrigger asChild>
@@ -56,87 +52,91 @@ import { Button } from '@/components/ui/button';
 //     );
 // }
 
-
-import * as React from "react"
+import * as React from "react";
 
 import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
-
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 // pages/postTask.js
-import { ChangeEvent, useState } from 'react';
+import { useState } from "react";
 
 export default function PostTask() {
-    const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
-    const [severity, setSeverity] = useState('');
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [severity, setSeverity] = useState("");
 
-    const handlePostTask = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+  const data = { title, content, severity };
 
+  const handlePostTask = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-        console.log('Posting task:', { title, content, severity });
-
-
-    };
-
-
-    const d = (e: string) => {
-
-        setSeverity(e);
+    if (title.length < 3 || content.length < 3) {
+      console.log("Error");
+    } else {
+      console.log({ title, content, severity });
     }
+  };
 
-    return (
-        <div className="max-w-xl mx-auto mt-8 p-4">
-            <h1 className="text-2xl font-bold mb-4">Post a Task</h1>
-            <form onSubmit={handlePostTask}>
-                <div className="mb-4">
-                    <label htmlFor="title" className="block text-sm font-medium text-gray-600">
-                        Title
-                    </label>
-                    <input
-                        type="text"
-                        id="title"
-                        className="mt-1 p-2 w-full border rounded-md"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                    />
-                </div>
-                <div className="mb-4">
-                    <label htmlFor="content" className="block text-sm font-medium text-gray-600">
-                        Content
-                    </label>
-                    <textarea
-                        id="content"
-                        className="mt-1 p-2 w-full border rounded-md"
-                        value={content}
-                        onChange={(e) => setContent(e.target.value)}
-                    ></textarea>
-                </div>
-                <div className="mb-4">
-                    <Select onValueChange={d}>
-                        <SelectTrigger className="w-[180px]">
-                            <SelectValue placeholder="Severity" />
-                        </SelectTrigger>
-                        <SelectContent>
+  const d = (e: string) => {
+    setSeverity(e);
+  };
 
-                            <SelectItem value="1">Low</SelectItem>
-                            <SelectItem value="2">Moderate</SelectItem>
-                            <SelectItem value="3">High</SelectItem>
-                            <SelectItem value="4">Critical</SelectItem>
-
-                        </SelectContent>
-                    </Select>
-
-                </div>
-                <Button>Submit</Button>
-            </form>
+  return (
+    <div className="max-w-xl mx-auto mt-8 p-4">
+      <h1 className="text-2xl font-bold mb-4">Post a Task</h1>
+      <form onSubmit={handlePostTask}>
+        <div className="mb-4">
+          <label
+            htmlFor="title"
+            className="block text-sm font-medium text-gray-600"
+          >
+            Title
+          </label>
+          <input
+            type="text"
+            id="title"
+            className="mt-1 p-2 w-full border rounded-md"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+          />
         </div>
-    );
+        <div className="mb-4">
+          <label
+            htmlFor="content"
+            className="block text-sm font-medium text-gray-600"
+          >
+            Content
+          </label>
+          <textarea
+            id="content"
+            className="mt-1 p-2 w-full border rounded-md"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            required
+          >
+          </textarea>
+        </div>
+        <div className="mb-4">
+          <Select onValueChange={d} required>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Severity" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="1">Low</SelectItem>
+              <SelectItem value="2">Moderate</SelectItem>
+              <SelectItem value="3">High</SelectItem>
+              <SelectItem value="4">Critical</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+        <Button>Submit</Button>
+      </form>
+    </div>
+  );
 }
-
