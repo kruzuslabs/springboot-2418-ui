@@ -12,14 +12,14 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta
           name="description"
-          content="Task Manager - The perfect tool to manage your tasks and improve your productivity. Create, organize and complete your tasks easily."
+          content="Ticket Manager - Streamline your ticketing process and enhance your workflow. Manage, organize, and resolve tickets efficiently."
         />
         <meta
           name="keywords"
-          content="task manager, productivity, create tasks, complete tasks, organize tasks"
+          content="ticket manager, workflow, organize tickets, resolve tickets, support system"
         />
         <meta name="author" content="kruzusLabs" />
-        <title>Task Manager</title>
+        <title>Ticket Manager</title>
       </Head>
       <Navbar />
       <main className="container mx-auto px-8 py-9 bg-base-200 rounded-md">

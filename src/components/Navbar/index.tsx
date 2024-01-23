@@ -30,8 +30,9 @@ function Navbar() {
         </svg>
       </button>
       <div
-        className={`flex-grow ${navOpen ? "" : "hidden"
-          } lg:flex lg:items-center lg:w-auto`}
+        className={`flex-grow ${
+          navOpen ? "" : "hidden"
+        } lg:flex lg:items-center lg:w-auto`}
         id="nav"
       >
         <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
@@ -108,7 +109,6 @@ function Navbar() {
                     Completed
                   </Link>
                 </li>
-
               </>
             )}
         </ul>
