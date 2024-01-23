@@ -1,8 +1,8 @@
 
-export default function Edit() {
+export default function Completed() {
     return (
         <>
-            completed list
+
         </>
     );
 }
