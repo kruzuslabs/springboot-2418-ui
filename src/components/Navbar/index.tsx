@@ -30,9 +30,8 @@ function Navbar() {
         </svg>
       </button>
       <div
-        className={`flex-grow ${
-          navOpen ? "" : "hidden"
-        } lg:flex lg:items-center lg:w-auto`}
+        className={`flex-grow ${navOpen ? "" : "hidden"
+          } lg:flex lg:items-center lg:w-auto`}
         id="nav"
       >
         <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
@@ -91,6 +90,16 @@ function Navbar() {
                     Create
                   </Link>
                 </li>
+
+                <li>
+                  <Link
+                    className="text-white hover:text-gray-400 px-4 py-2 block"
+                    href="/tasks"
+                  >
+                    Tasks
+                  </Link>
+                </li>
+
                 <li>
                   <Link
                     className="text-white hover:text-gray-400 px-4 py-2 block"
@@ -99,6 +108,7 @@ function Navbar() {
                     Completed
                   </Link>
                 </li>
+
               </>
             )}
         </ul>
