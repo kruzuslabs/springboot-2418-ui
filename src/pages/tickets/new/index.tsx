@@ -1,56 +1,56 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-// import * as React from "react";
-// import { CalendarIcon } from "@radix-ui/react-icons";
-// import { format } from "date-fns";
 
-// import { cn } from "@/lib/utils";
-// import { Button } from "@/components/ui/button";
-// import { Calendar } from "@/components/ui/calendar";
-// import {
-//     Popover,
-//     PopoverContent,
-//     PopoverTrigger,
-// } from "@/components/ui/popover";
+import { CalendarIcon } from "@radix-ui/react-icons";
+import { format } from "date-fns";
 
-// export default function DatePickerDemo() {
-//     const [date, setDate] = React.useState<Date>();
-//     console.log(date);
+import { cn } from "@/lib/utils";
 
-//     return (
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
-//         <>
+function DatePickerDemo() {
+  const [date, setDate] = React.useState<Date>();
+  console.log(date);
 
-//             <div className={`flex min-h-screen flex-col items-center justify-between`}>
+  return (
 
-//                 <Popover>
-//                     <PopoverTrigger asChild>
-//                         <Button
-//                             variant={"outline"}
-//                             className={cn(
-//                                 "w-[240px] justify-start text-left font-normal",
-//                                 !date && "text-muted-foreground"
-//                             )}
-//                         >
-//                             <CalendarIcon className="mr-2 h-4 w-4" />
-//                             {date ? format(date, "MM/dd/yyyy") : <span>Pick a date</span>}
-//                         </Button>
-//                     </PopoverTrigger>
-//                     <PopoverContent className="w-auto p-0" align="start">
-//                         <Calendar
-//                             mode="single"
-//                             selected={date}
-//                             onSelect={setDate}
-//                             initialFocus
-//                         />
-//                     </PopoverContent>
-//                 </Popover>
+    <>
 
-//             </div>
-//         </>
-//     );
-// }
+      <div className={`flex min-h-screen flex-col items-center justify-between`}>
+
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button
+              variant={"outline"}
+              className={cn(
+                "w-[240px] justify-start text-left font-normal",
+                !date && "text-muted-foreground"
+              )}
+            >
+              <CalendarIcon className="mr-2 h-4 w-4" />
+              {date ? format(date, "MM/dd/yyyy") : <span>Pick a date</span>}
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto p-0" align="start">
+            <Calendar
+              mode="single"
+              selected={date}
+              onSelect={setDate}
+              initialFocus
+            />
+          </PopoverContent>
+        </Popover>
+
+      </div>
+    </>
+  );
+}
 
 import * as React from "react";
 
