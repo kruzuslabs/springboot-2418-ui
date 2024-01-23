@@ -22,7 +22,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <title>Ticket Manager</title>
       </Head>
       <Navbar />
-      <main className="container mx-auto px-8 py-9 bg-base-200 rounded-md">
+      <main>
         <Component {...pageProps} />
       </main>
     </>

@@ -122,7 +122,8 @@ export default function PostTask() {
           >
           </textarea>
         </div>
-        <div className="mb-4">
+
+        <div className="mb-5">
           <Select onValueChange={d} required>
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Severity" />
@@ -134,7 +135,12 @@ export default function PostTask() {
               <SelectItem value="4">Critical</SelectItem>
             </SelectContent>
           </Select>
+
+          <DatePickerDemo />
+
         </div>
+
+
         <Button>Submit</Button>
       </form>
     </div>
