@@ -59,61 +59,42 @@ import { Button } from '@/components/ui/button';
 
 import * as React from "react"
 
-
 import {
-    Command,
-    CommandEmpty,
-    CommandGroup,
-    CommandInput,
-    CommandItem,
-    CommandList,
-} from "@/components/ui/command"
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/popover"
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
 
-
-type Status = {
-    value: string
-    label: string
-}
-
-
-const statuses: Status[] = [
-    {
-        value: "backlog",
-        label: "Backlog",
-    },
-    {
-        value: "backlog",
-        label: "Backlog",
-    },
-    {
-        value: "backlog",
-        label: "Backlog",
-    },
-
-]
 
 // pages/postTask.js
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 export default function PostTask() {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
-    const [severity, setSeverity] = useState(0);
+    const [severity, setSeverity] = useState('');
 
-    const handlePostTask = () => {
-        // Implement logic to post the task to your database
+    const handlePostTask = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+
         console.log('Posting task:', { title, content, severity });
+
+
     };
+
+
+    const d = (e: string) => {
+
+        setSeverity(e);
+    }
 
     return (
         <div className="max-w-xl mx-auto mt-8 p-4">
             <h1 className="text-2xl font-bold mb-4">Post a Task</h1>
-            <form>
+            <form onSubmit={handlePostTask}>
                 <div className="mb-4">
                     <label htmlFor="title" className="block text-sm font-medium text-gray-600">
                         Title
@@ -138,6 +119,19 @@ export default function PostTask() {
                     ></textarea>
                 </div>
                 <div className="mb-4">
+                    <Select onValueChange={d}>
+                        <SelectTrigger className="w-[180px]">
+                            <SelectValue placeholder="Severity" />
+                        </SelectTrigger>
+                        <SelectContent>
+
+                            <SelectItem value="1">Low</SelectItem>
+                            <SelectItem value="2">Moderate</SelectItem>
+                            <SelectItem value="3">High</SelectItem>
+                            <SelectItem value="4">Critical</SelectItem>
+
+                        </SelectContent>
+                    </Select>
 
                 </div>
                 <Button>Submit</Button>
