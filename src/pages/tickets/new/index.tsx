@@ -20,18 +20,15 @@ import {
 } from "@/components/ui/select";
 import { useState } from "react";
 
-
-
-
-
-
-
 export default function PostTask() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [severity, setSeverity] = useState("");
+  const [date, setDate] = useState<Date | undefined>(new Date());
 
-  const data = { title, content, severity };
+  const handleDateSelect = () => {
+    setDate(new Date());
+  };
 
   const handlePostTask = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -39,12 +36,12 @@ export default function PostTask() {
     if (title.length < 3 || content.length < 3) {
       console.log("Error");
     } else {
-      console.log({ title, content, severity });
+      console.log({ title, content, severity, date: date });
     }
   };
 
-  const d = (e: string) => {
-    setSeverity(e);
+  const handleSeverityChange = (selectedSeverity: string) => {
+    setSeverity(selectedSeverity);
   };
 
   return (
@@ -67,7 +64,6 @@ export default function PostTask() {
             required
           />
         </div>
-
         <div className="mb-4">
           <label
             htmlFor="content"
@@ -81,12 +77,11 @@ export default function PostTask() {
             value={content}
             onChange={(e) => setContent(e.target.value)}
             required
-          >
-          </textarea>
+          />
         </div>
 
         <div className="mb-5">
-          <Select onValueChange={d} required>
+          <Select onValueChange={handleSeverityChange} required>
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Severity" />
             </SelectTrigger>
@@ -98,45 +93,30 @@ export default function PostTask() {
             </SelectContent>
           </Select>
 
-          <DatePickerDemo />
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant="outline"
+                className={`w-[240px] justify-start text-left font-normal ${!date && "text-muted-foreground"
+                  }`}
+              >
+                <CalendarIcon className="mr-2 h-4 w-4" />
+                {date ? format(date, "MM/dd/yyyy") : <span>Pick a date</span>}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0" align="start">
+              <Calendar
+                mode="single"
+                selected={date}
+                onSelect={handleDateSelect}
+                initialFocus
+              />
+            </PopoverContent>
+          </Popover>
         </div>
 
-        <Button>Submit</Button>
+        <Button type="submit">Submit</Button>
       </form>
     </div>
-  );
-}
-
-function DatePickerDemo() {
-  const [date, setDate] = React.useState<Date>();
-  console.log(date);
-
-  return (
-    <>
-      <div>
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button
-              variant={"outline"}
-              className={cn(
-                "w-[240px] justify-start text-left font-normal",
-                !date && "text-muted-foreground",
-              )}
-            >
-              <CalendarIcon className="mr-2 h-4 w-4" />
-              {date ? format(date, "MM/dd/yyyy") : <span>Pick a date</span>}
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-auto p-0" align="start">
-            <Calendar
-              mode="single"
-              selected={date}
-              onSelect={setDate}
-              initialFocus
-            />
-          </PopoverContent>
-        </Popover>
-      </div>
-    </>
   );
 }
