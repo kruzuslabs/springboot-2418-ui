@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import { format } from "date-fns";
-import { cn } from "@/lib/utils";
+
 import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
@@ -18,17 +18,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function PostTask() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [severity, setSeverity] = useState("");
-  const [date, setDate] = useState<Date | undefined>(new Date());
 
-  const handleDateSelect = () => {
-    setDate(new Date());
-  };
+  const [dueDate, setDueDate] = useState<Date | undefined>();
+
+
+
 
   const handlePostTask = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -36,7 +36,7 @@ export default function PostTask() {
     if (title.length < 3 || content.length < 3) {
       console.log("Error");
     } else {
-      console.log({ title, content, severity, date: date });
+      console.log({ title, content, severity, date: new Date });
     }
   };
 
@@ -97,18 +97,18 @@ export default function PostTask() {
             <PopoverTrigger asChild>
               <Button
                 variant="outline"
-                className={`w-[240px] justify-start text-left font-normal ${!date && "text-muted-foreground"
+                className={`w-[240px] justify-start text-left font-normal ${!dueDate && "text-muted-foreground"
                   }`}
               >
                 <CalendarIcon className="mr-2 h-4 w-4" />
-                {date ? format(date, "MM/dd/yyyy") : <span>Pick a date</span>}
+                {dueDate ? format(dueDate, "MM/dd/yyyy") : <span>Pick a date</span>}
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="start">
               <Calendar
                 mode="single"
-                selected={date}
-                onSelect={handleDateSelect}
+                selected={dueDate}
+                onSelect={setDueDate}
                 initialFocus
               />
             </PopoverContent>
