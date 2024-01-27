@@ -1,10 +1,8 @@
-"use client";
-
+'use client'
 import { Button } from "@/components/ui/button";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import { format } from "date-fns";
 
-import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
   PopoverContent,
@@ -19,6 +17,17 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useEffect, useState } from "react";
+import Calendar from "@/components/ui/calendar";
+
+
+import dynamic from 'next/dynamic'
+
+// wrap your component that uses the graph lib.
+const DynamicComponentWithNoSSR = dynamic(
+  () => import("../../../components/Navbar"),
+  { ssr: false }
+)
+
 
 export default function PostTask() {
   const [title, setTitle] = useState("");
@@ -30,13 +39,20 @@ export default function PostTask() {
 
 
 
+
+
+
+
   const handlePostTask = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+
+
 
     if (title.length < 3 || content.length < 3) {
       console.log("Error");
     } else {
-      console.log({ title, content, severity, date: new Date });
+      console.log(dueDate);
     }
   };
 
@@ -101,15 +117,16 @@ export default function PostTask() {
                   }`}
               >
                 <CalendarIcon className="mr-2 h-4 w-4" />
-                {dueDate ? format(dueDate, "MM/dd/yyyy") : <span>Pick a date</span>}
+                {dueDate ? format(dueDate, "PPP") : <span>Pick a date</span>}
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="start">
               <Calendar
                 mode="single"
                 selected={dueDate}
-                onSelect={setDueDate}
+                onSelect={() => { setDueDate(new Date) }}
                 initialFocus
+
               />
             </PopoverContent>
           </Popover>
