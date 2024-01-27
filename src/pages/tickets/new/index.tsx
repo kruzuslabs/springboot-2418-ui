@@ -1,7 +1,7 @@
-'use client'
+"use client";
 import { Button } from "@/components/ui/button";
 import { CalendarIcon } from "@radix-ui/react-icons";
-import { format } from "date-fns";
+import { format, setDate } from "date-fns";
 
 import {
   Popover,
@@ -16,43 +16,29 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useEffect, useState } from "react";
-import Calendar from "@/components/ui/calendar";
+import { useState } from "react";
+import { Calendar } from "@/components/ui/calendar";
+import { toast } from "sonner";
 
-
-import dynamic from 'next/dynamic'
-
-// wrap your component that uses the graph lib.
-const DynamicComponentWithNoSSR = dynamic(
-  () => import("../../../components/Navbar"),
-  { ssr: false }
-)
-
-
-export default function PostTask() {
+export default function PostTicket() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [severity, setSeverity] = useState("");
 
-  const [dueDate, setDueDate] = useState<Date | undefined>();
+  const [dueDate, setDueDate] = useState<Date | undefined>(new Date());
 
-
-
-
-
-
-
-
-  const handlePostTask = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleTicket = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-
-
 
     if (title.length < 3 || content.length < 3) {
       console.log("Error");
     } else {
-      console.log(dueDate);
+      console.log({
+        title,
+        content,
+        severity,
+        dueDate: format(dueDate as unknown as string, "PPP"),
+      });
     }
   };
 
@@ -63,7 +49,7 @@ export default function PostTask() {
   return (
     <div className="max-w-xl mx-auto mt-8 p-4">
       <h1 className="text-2xl font-bold mb-4">Post a Task</h1>
-      <form onSubmit={handlePostTask}>
+      <form onSubmit={handleTicket}>
         <div className="mb-4">
           <label
             htmlFor="title"
@@ -113,8 +99,9 @@ export default function PostTask() {
             <PopoverTrigger asChild>
               <Button
                 variant="outline"
-                className={`w-[240px] justify-start text-left font-normal ${!dueDate && "text-muted-foreground"
-                  }`}
+                className={`w-[240px] justify-start text-left font-normal ${
+                  !dueDate && "text-muted-foreground"
+                }`}
               >
                 <CalendarIcon className="mr-2 h-4 w-4" />
                 {dueDate ? format(dueDate, "PPP") : <span>Pick a date</span>}
@@ -124,15 +111,23 @@ export default function PostTask() {
               <Calendar
                 mode="single"
                 selected={dueDate}
-                onSelect={() => { setDueDate(new Date) }}
+                onSelect={setDueDate}
                 initialFocus
-
               />
             </PopoverContent>
           </Popover>
         </div>
-
-        <Button type="submit">Submit</Button>
+        <Button
+          variant="destructive"
+          onClick={() =>
+            toast("Ticket has been created", {
+              description: `${title.toUpperCase()} on ${
+                format(dueDate as unknown as string, "PPP")
+              }`,
+            })}
+        >
+          Create
+        </Button>
       </form>
     </div>
   );

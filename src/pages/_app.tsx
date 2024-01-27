@@ -3,6 +3,7 @@ import "@/styles/globals.scss";
 
 import Navbar from "../components/Navbar";
 import Head from "next/head";
+import { Toaster } from "@/components/ui/sonner";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -24,6 +25,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Navbar />
       <main>
         <Component {...pageProps} />
+        <Toaster />
       </main>
     </>
   );
