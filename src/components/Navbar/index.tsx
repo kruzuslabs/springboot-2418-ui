@@ -30,9 +30,8 @@ function Navbar() {
         </svg>
       </button>
       <div
-        className={`flex-grow ${
-          navOpen ? "" : "hidden"
-        } lg:flex lg:items-center lg:w-auto`}
+        className={`flex-grow ${navOpen ? "" : "hidden"
+          } lg:flex lg:items-center lg:w-auto`}
         id="nav"
       >
         <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
@@ -70,9 +69,9 @@ function Navbar() {
                 <li>
                   <Link
                     className="text-white hover:text-gray-400 px-4 py-2 block"
-                    href="/profile"
+                    href="/admin"
                   >
-                    Profile
+                    Admin Page
                   </Link>
                 </li>
                 <li>
@@ -80,7 +79,7 @@ function Navbar() {
                     className="text-white hover:text-gray-400 px-4 py-2 block"
                     href="/edit"
                   >
-                    Edit Tasks
+                    Edit Ticket
                   </Link>
                 </li>
                 <li>
@@ -88,7 +87,7 @@ function Navbar() {
                     className="text-white hover:text-gray-400 px-4 py-2 block"
                     href="/tickets/new"
                   >
-                    Create
+                    New Ticket
                   </Link>
                 </li>
 
@@ -97,7 +96,7 @@ function Navbar() {
                     className="text-white hover:text-gray-400 px-4 py-2 block"
                     href="/tickets"
                   >
-                    Tasks
+                    My Tickets
                   </Link>
                 </li>
 
