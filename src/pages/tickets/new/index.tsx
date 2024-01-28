@@ -60,8 +60,15 @@ export default function PostTicket() {
           : format(dueDate as unknown as string, "PPP")
           }`,
       });
+
+
+
+
     }
   };
+
+
+
 
   const handleSeverityChange = (selectedSeverity: string) => {
     setSeverity(selectedSeverity);
@@ -69,7 +76,7 @@ export default function PostTicket() {
 
   return (
     <div className="max-w-xl mx-auto mt-8 p-4">
-      <h1 className="text-2xl font-bold mb-4">Post a Task</h1>
+      <h1 className="text-2xl font-bold mb-4">Post a Ticket</h1>
       <form onSubmit={handleTicket}>
         <div className="mb-4">
           <label
@@ -79,6 +86,7 @@ export default function PostTicket() {
             Title
           </label>
           <input
+            placeholder="'Printer Not Working' or 'Login Error'"
             type="text"
             id="title"
             className="mt-1 p-2 w-full border rounded-md"
@@ -95,6 +103,7 @@ export default function PostTicket() {
             Content
           </label>
           <textarea
+            placeholder="Describe the issue in detail, including any error messages or steps to reproduce."
             id="content"
             className="mt-1 p-2 w-full border rounded-md"
             value={content}
@@ -103,7 +112,7 @@ export default function PostTicket() {
           />
         </div>
 
-        <div className="mb-5">
+        <div className="flex justify-evenly mb-5">
           <Select onValueChange={handleSeverityChange} required>
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Severity" />
@@ -136,10 +145,11 @@ export default function PostTicket() {
               />
             </PopoverContent>
           </Popover>
+          <Button variant="destructive">
+            Create
+          </Button>
         </div>
-        <Button variant="destructive">
-          Create
-        </Button>
+
       </form>
     </div>
   );
