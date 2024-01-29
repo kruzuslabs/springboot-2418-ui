@@ -1,3 +1,4 @@
+"use client";
 /*
 TODO: Implement Get ALL Tickets for now, then refactor this for ADMINS with more info and
 for Users with regular info.
@@ -164,36 +165,36 @@ export default function Tickets() {
   };
 
   return (
-    <div className="flex justify-center p-6 mt-2 ">
-      <div className="max-w-screen-xl w-full">
-        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 justify-center">
-          {AllTickets.map((ticket, index) => (
-            <div
-              key={index}
-              className={`rounded-lg overflow-hidden shadow-md ${
-                getSeverityColor(ticket.severity)
-              }`}
-            >
-              <div className="p-4">
-                <h4 className="text-lg font-semibold mb-2">{ticket.title}</h4>
-                <p className="text-sm text-gray-700 mb-2">{ticket.content}</p>
-                <div className="flex items-center mb-2">
-                  <span
-                    className={`px-2 py-1 text-xs rounded ${
-                      getSeverityColor(ticket.severity)
-                    }`}
-                  >
-                    Severity: {ticket.severity}
-                  </span>
+    <>
+      <div className="flex justify-center p-6 mt-2 ">
+        <div className="max-w-screen-xl w-full">
+          <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 justify-center">
+            {AllTickets.map((ticket, index) => (
+              <div
+                key={index}
+                className={`rounded-lg overflow-hidden shadow-md ${getSeverityColor(ticket.severity)
+                  }`}
+              >
+                <div className="p-4">
+                  <h4 className="text-lg font-semibold mb-2">{ticket.title}</h4>
+                  <p className="text-sm text-gray-700 mb-2">{ticket.content}</p>
+                  <div className="flex items-center mb-2">
+                    <span
+                      className={`px-2 py-1 text-xs rounded ${getSeverityColor(ticket.severity)
+                        }`}
+                    >
+                      Severity: {ticket.severity}
+                    </span>
+                  </div>
+                  <p className="text-xs text-gray-500">
+                    Due Date: {format(ticket.dueDate, "PPP")}
+                  </p>
                 </div>
-                <p className="text-xs text-gray-500">
-                  Due Date: {ticket.dueDate.toString()}
-                </p>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
