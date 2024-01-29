@@ -48,7 +48,7 @@ const AllTickets: Ticketz[] = [
     title: "Printer Not Responding",
     content: "Unable to print documents",
     severity: "3",
-    dueDate: new Date(),
+    dueDate: new Date("2009"),
   },
   {
     title: "Email Configuration",
