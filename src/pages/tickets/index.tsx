@@ -172,16 +172,18 @@ export default function Tickets() {
             {AllTickets.map((ticket, index) => (
               <div
                 key={index}
-                className={`rounded-lg overflow-hidden shadow-md ${getSeverityColor(ticket.severity)
-                  }`}
+                className={`rounded-lg overflow-hidden shadow-md ${
+                  getSeverityColor(ticket.severity)
+                }`}
               >
                 <div className="p-4">
                   <h4 className="text-lg font-semibold mb-2">{ticket.title}</h4>
                   <p className="text-sm text-gray-700 mb-2">{ticket.content}</p>
                   <div className="flex items-center mb-2">
                     <span
-                      className={`px-2 py-1 text-xs rounded ${getSeverityColor(ticket.severity)
-                        }`}
+                      className={`px-2 py-1 text-xs rounded ${
+                        getSeverityColor(ticket.severity)
+                      }`}
                     >
                       Severity: {ticket.severity}
                     </span>
