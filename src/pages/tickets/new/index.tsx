@@ -30,12 +30,13 @@ export default function PostTicket() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [severity, setSeverity] = useState("");
+  const [dueDate, setDueDate] = useState<Date | undefined>(new Date());
 
   const { toast } = useToast();
 
-  const [dueDate, setDueDate] = useState<Date | undefined>(new Date());
+  const DATA = { title, content, severity, dueDate };
 
-  const handleTicket = (e: React.FormEvent<HTMLFormElement>) => {
+  const TicketPostHandle = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (title.length < 3 || content.length < 3) {
@@ -54,11 +55,12 @@ export default function PostTicket() {
       });
 
       TOSTER("Ticket has been created", {
-        description: `${truncate(title.toUpperCase())} due on ${format(dueDate as unknown as string, "PPP") ===
-          format(new Date(), "PPP")
-          ? "Today"
-          : format(dueDate as unknown as string, "PPP")
-          }`,
+        description: `${truncate(title.toUpperCase())} due on ${
+          format(dueDate as unknown as string, "PPP") ===
+              format(new Date(), "PPP")
+            ? "Today"
+            : format(dueDate as unknown as string, "PPP")
+        }`,
       });
     }
   };
@@ -70,7 +72,7 @@ export default function PostTicket() {
   return (
     <div className="max-w-xl mx-auto mt-8 p-4">
       <h1 className="text-2xl font-bold mb-4">Post a Ticket</h1>
-      <form onSubmit={handleTicket}>
+      <form onSubmit={TicketPostHandle}>
         <div className="mb-4">
           <label
             htmlFor="title"
@@ -122,8 +124,9 @@ export default function PostTicket() {
             <PopoverTrigger asChild>
               <Button
                 variant="outline"
-                className={`w-[240px] justify-start text-left font-normal ${!dueDate && "text-muted-foreground"
-                  }`}
+                className={`w-[240px] justify-start text-left font-normal ${
+                  !dueDate && "text-muted-foreground"
+                }`}
               >
                 <CalendarIcon className="mr-2 h-4 w-4" />
                 {dueDate ? format(dueDate, "PPP") : <span>Pick a date</span>}
@@ -143,6 +146,15 @@ export default function PostTicket() {
           </Button>
         </div>
       </form>
+      {/*test REMOVE LATER*/}
+      {DATA.title.length < 3 || DATA.content.length < 3
+        ? (
+          <div className="text-red-500 font-bold">
+            TEST: Write something in these forms.
+          </div>
+        )
+        : JSON.stringify(DATA)}
+      {/*test REMOVE LATER*/}
     </div>
   );
 }

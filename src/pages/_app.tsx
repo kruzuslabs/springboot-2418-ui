@@ -25,11 +25,12 @@ export default function App({ Component, pageProps }: AppProps) {
         <title>Ticket Manager</title>
       </Head>
       <Navbar />
+
       <main>
         <Component {...pageProps} />
-        <Goast />
-        <Toaster />
       </main>
+      <Goast />
+      <Toaster />
     </>
   );
 }
