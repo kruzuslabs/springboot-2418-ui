@@ -24,7 +24,7 @@ import { toast as Toaster } from "sonner";
 import { useToast } from "@/components/ui/use-toast";
 
 const truncate = (input: string) =>
-  input?.length > 11 ? `${input.substring(0, 12)}...` : input;
+  input?.length > 20 ? `${input.substring(0, 20)}...` : input;
 
 export default function PostTicket() {
   const [title, setTitle] = useState("");
@@ -53,12 +53,11 @@ export default function PostTicket() {
       });
 
       Toaster("Ticket has been created", {
-        description: `${truncate(title.toUpperCase())} due on ${
-          format(dueDate as unknown as string, "PPP") ===
-              format(new Date(), "PPP")
-            ? "Today"
-            : format(dueDate as unknown as string, "PPP")
-        }`,
+        description: `${truncate(title)} due on ${format(dueDate as unknown as string, "PPP") ===
+          format(new Date(), "PPP")
+          ? "Today"
+          : format(dueDate as unknown as string, "PPP")
+          }`,
       });
     }
   };
@@ -122,9 +121,8 @@ export default function PostTicket() {
             <PopoverTrigger asChild>
               <Button
                 variant="outline"
-                className={`w-[240px] justify-start text-left font-normal ${
-                  !dueDate && "text-muted-foreground"
-                }`}
+                className={`w-[240px] justify-start text-left font-normal ${!dueDate && "text-muted-foreground"
+                  }`}
               >
                 <CalendarIcon className="mr-2 h-4 w-4" />
                 {dueDate ? format(dueDate, "PPP") : <span>Pick a date</span>}
