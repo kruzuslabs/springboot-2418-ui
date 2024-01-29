@@ -60,15 +60,8 @@ export default function PostTicket() {
           : format(dueDate as unknown as string, "PPP")
           }`,
       });
-
-
-
-
     }
   };
-
-
-
 
   const handleSeverityChange = (selectedSeverity: string) => {
     setSeverity(selectedSeverity);
@@ -149,7 +142,6 @@ export default function PostTicket() {
             Create
           </Button>
         </div>
-
       </form>
     </div>
   );
