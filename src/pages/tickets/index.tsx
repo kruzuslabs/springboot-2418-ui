@@ -188,9 +188,8 @@ export default function Tickets() {
                       Severity: {ticket.severity}
                     </span>
                   </div>
-                  <p className="text-xs text-gray-500">
-                    Due Date: {format(ticket.dueDate, "PPP")}
-                  </p>
+
+                  Due Date: {format(ticket.dueDate, "PPP")}
                 </div>
               </div>
             ))}

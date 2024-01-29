@@ -19,7 +19,7 @@ import {
 import { useState } from "react";
 import { Calendar } from "@/components/ui/calendar";
 
-import { toast as TOSTER } from "sonner";
+import { toast as Toaster } from "sonner";
 
 import { useToast } from "@/components/ui/use-toast";
 
@@ -33,8 +33,6 @@ export default function PostTicket() {
   const [dueDate, setDueDate] = useState<Date | undefined>(new Date());
 
   const { toast } = useToast();
-
-  const DATA = { title, content, severity, dueDate };
 
   const TicketPostHandle = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -54,7 +52,7 @@ export default function PostTicket() {
         dueDate: format(dueDate as unknown as string, "PPP"),
       });
 
-      TOSTER("Ticket has been created", {
+      Toaster("Ticket has been created", {
         description: `${truncate(title.toUpperCase())} due on ${
           format(dueDate as unknown as string, "PPP") ===
               format(new Date(), "PPP")
@@ -107,7 +105,7 @@ export default function PostTicket() {
           />
         </div>
 
-        <div className="flex justify-evenly mb-5">
+        <div className="flex justify-between mb-5">
           <Select onValueChange={handleSeverityChange} required>
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Severity" />
@@ -146,15 +144,6 @@ export default function PostTicket() {
           </Button>
         </div>
       </form>
-      {/*test REMOVE LATER*/}
-      {DATA.title.length < 3 || DATA.content.length < 3
-        ? (
-          <div className="text-red-500 font-bold">
-            TEST: Write something in these forms.
-          </div>
-        )
-        : JSON.stringify(DATA)}
-      {/*test REMOVE LATER*/}
     </div>
   );
 }

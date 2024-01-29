@@ -4,8 +4,9 @@ import { useState } from "react";
 function Navbar() {
   const [navOpen, setNavOpen] = useState(false);
 
+  const isAdmin = true;
+
   //implmenet sub
-  const isLogged = true;
 
   function toggleNav() {
     setNavOpen(!navOpen);
@@ -29,6 +30,7 @@ function Navbar() {
           <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
         </svg>
       </button>
+
       <div
         className={`flex-grow ${
           navOpen ? "" : "hidden"
@@ -36,7 +38,7 @@ function Navbar() {
         id="nav"
       >
         <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
-          {!isLogged
+          {!isAdmin
             ? (
               <>
                 <li>
