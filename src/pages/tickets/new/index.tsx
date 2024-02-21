@@ -1,8 +1,8 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { CalendarIcon } from "@radix-ui/react-icons";
-import { format, setDate } from "date-fns";
-
+import { format } from "date-fns";
+import axios from "axios";
 import {
   Popover,
   PopoverContent,
@@ -22,9 +22,15 @@ import { Calendar } from "@/components/ui/calendar";
 import { toast as Toaster } from "sonner";
 
 import { useToast } from "@/components/ui/use-toast";
+import { UUID, randomUUID } from "crypto";
 
 const truncate = (input: string) =>
   input?.length > 20 ? `${input.substring(0, 20)}...` : input;
+
+
+
+
+
 
 export default function PostTicket() {
   const [title, setTitle] = useState("");
@@ -34,8 +40,11 @@ export default function PostTicket() {
 
   const { toast } = useToast();
 
-  const TicketPostHandle = (e: React.FormEvent<HTMLFormElement>) => {
+  const TicketPostHandle = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+
+
 
     if (title.length < 3 || content.length < 3) {
       toast({
@@ -45,11 +54,14 @@ export default function PostTicket() {
         variant: "destructive",
       });
     } else {
-      console.table({
-        title,
-        content,
-        severity,
-        dueDate: format(dueDate as unknown as string, "PPP"),
+
+      await axios.post("http://localhost:8080/api/ticket/new", {
+        complted: false,
+        title: title,
+        content: content,
+        severity: severity,
+        due_date: dueDate,
+
       });
 
       Toaster("Ticket has been created", {
@@ -59,6 +71,8 @@ export default function PostTicket() {
           : format(dueDate as unknown as string, "PPP")
           }`,
       });
+
+
     }
   };
 
@@ -137,7 +151,7 @@ export default function PostTicket() {
               />
             </PopoverContent>
           </Popover>
-          <Button variant="destructive">
+          <Button type="submit" variant="destructive">
             Create
           </Button>
         </div>
