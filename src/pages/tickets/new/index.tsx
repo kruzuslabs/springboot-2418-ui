@@ -22,7 +22,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { toast as Toaster } from "sonner";
 
 import { useToast } from "@/components/ui/use-toast";
-import { UUID, randomUUID } from "crypto";
+
 
 const truncate = (input: string) =>
   input?.length > 20 ? `${input.substring(0, 20)}...` : input;
@@ -56,7 +56,7 @@ export default function PostTicket() {
     } else {
 
       await axios.post("http://localhost:8080/api/ticket/new", {
-        complted: false,
+
         title: title,
         content: content,
         severity: severity,
